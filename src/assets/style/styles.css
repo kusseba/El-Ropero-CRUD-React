@@ -161,6 +161,7 @@ footer {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+<<<<<<< HEAD
 }
 
 .register-form {
@@ -187,10 +188,10 @@ footer {
 .register-form .MuiTextField-root .MuiFormLabel-root {
   font-family: 'Montserrat', sans-serif;
   color: var(--scrollbar-thumb-color);
-  position: static; /* Hace que los labels estén siempre visibles */
-  transform: none; /* Elimina cualquier transformación que pudiera hacerlos flotantes */
-  font-size: 14px; /* Ajusta el tamaño de la fuente si es necesario */
-  margin-bottom: 5px; /* Añade espacio entre el label y el campo */
+  position: static;
+  transform: none;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .register-form .MuiTextField-root .MuiInputBase-root {
@@ -227,3 +228,6 @@ footer {
   color: red;
   margin-top: 10px;
 }
+=======
+}
+>>>>>>> parent of 054de36 (registro y estilos para el registro)

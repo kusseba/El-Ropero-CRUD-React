@@ -7,7 +7,6 @@ import Index from './index/Index';
 import Brand from './brand/Brand';
 import Category from './category/Category';
 import Product from './product/Product';
-import Register from './register/Register';
 
 const theme = createTheme({
   typography: {
@@ -44,10 +43,6 @@ const router = createBrowserRouter([
   {
     path: 'product',
     element: <Product />,
-  },
-  {
-    path: 'register',
-    element: <Register />,
   },
 ]);
 

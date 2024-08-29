@@ -13,7 +13,6 @@ const Register = () => {
     setLoading(true);
     try {
       const response = await axios.post('/api/Register', data);
-      // Manejar la respuesta, como redirigir al usuario o mostrar un mensaje de éxito
     } catch (error) {
       setError(error.response?.data?.message || 'Ocurrió un error al registrar');
     } finally {

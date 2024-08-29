@@ -162,3 +162,68 @@ footer {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+.register-form {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px 0px var(--shadow-color);
+  padding: 20px;
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+.register-form .MuiTypography-h4 {
+  font-family: 'Timing', sans-serif;
+  color: var(--scrollbar-thumb-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.register-form .MuiTextField-root {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.register-form .MuiTextField-root .MuiFormLabel-root {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--scrollbar-thumb-color);
+  position: static; /* Hace que los labels estén siempre visibles */
+  transform: none; /* Elimina cualquier transformación que pudiera hacerlos flotantes */
+  font-size: 14px; /* Ajusta el tamaño de la fuente si es necesario */
+  margin-bottom: 5px; /* Añade espacio entre el label y el campo */
+}
+
+.register-form .MuiTextField-root .MuiInputBase-root {
+  border-radius: 4px;
+  border: 1px solid var(--scrollbar-thumb-color);
+  background: #f9f9f9;
+}
+
+.register-form .MuiTextField-root.Mui-error .MuiInputBase-root {
+  border-color: red;
+}
+
+.register-form .MuiTextField-root .MuiInputBase-input {
+  padding: 10px;
+}
+
+.register-form .MuiButton-containedPrimary {
+  background: var(--scrollbar-thumb-color);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100%;
+}
+
+.register-form .MuiButton-containedPrimary:disabled {
+  background: #ccc;
+}
+
+.register-form .MuiTypography-body2 {
+  color: red;
+  margin-top: 10px;
+}

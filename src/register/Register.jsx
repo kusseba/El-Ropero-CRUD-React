@@ -5,7 +5,15 @@ import axios from 'axios';
 import '../assets/style/styles.css';
 
 const Register = () => {
-  const { control, handleSubmit, setError, formState: { errors, isSubmitting }, getValues } = useForm();
+  const { control, handleSubmit, setError, formState: { errors, isSubmitting }, getValues } = useForm({
+    defaultValues: {
+      email: null,
+      first_name: null,
+      last_name: null,
+      password: null,
+      repeat_password: null
+    }
+  });
 
   const onSubmit = async (data) => {
     try {

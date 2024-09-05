@@ -1,22 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@material-ui/core';
 import axios from 'axios';
 import '../assets/style/styles.css';
 
 const Register = () => {
-  const { control, handleSubmit, formState: { errors }, getValues } = useForm();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { control, handleSubmit, setError, formState: { errors, isSubmitting }, getValues } = useForm();
 
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const response = await axios.post('/api/Register', data);
-    } catch (error) {
-      setError(error.response?.data?.message || 'Ocurrió un error al registrar');
-    } finally {
-      setLoading(false);
+      const response = await axios.post('https://el-ropero-crud.onrender.com/v1/signup/', data);
+    } catch (e) {
+      if (e?.response?.data) {
+        let error = [];
+
+        if (e.response.data.email) {
+          error.push({
+            field: 'email',
+            message: e.response.data.email
+          });
+        }
+
+        if (e.response.data.password) {
+          error.push({
+            field: 'password',
+            message: e.response.data.password
+          },
+            {
+              field: 'repeat_password',
+              message: e.response.data.password
+            });
+        }
+
+        if (error.length > 0) {
+          error.forEach(({ field, message }) =>
+            setError(field, { type: 'manual', message })
+          );
+          return;
+        }
+      }
     }
   };
 
@@ -24,7 +47,7 @@ const Register = () => {
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       <Grid item xs={12}>
         <div className="register-form">
-          <Typography variant="h4">Registro</Typography>
+          <Typography variant="h4">Registrarse</Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
               name="email"
@@ -96,13 +119,8 @@ const Register = () => {
                 />
               )}
             />
-            {error && (
-              <Typography variant="body2" color="error">
-                {error}
-              </Typography>
-            )}
             <Button type="submit" variant="contained" color="primary" disabled={loading}>
-              {loading ? 'Registrando...' : 'Registrar'}
+              {isSubmitting ? 'Registrando...' : 'Registrarse'}
             </Button>
           </form>
         </div>

@@ -10,6 +10,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post('https://el-ropero-crud.onrender.com/v1/signup/', data);
+      console.log(response);
     } catch (e) {
       if (e?.response?.data) {
         let error = [];

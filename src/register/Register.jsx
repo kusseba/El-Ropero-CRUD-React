@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import '../assets/style/styles.css';
 
 const Register = () => {
+  const [registered, setRegistered] = useState(false);
+  
   const { control, handleSubmit, setError, formState: { errors, isSubmitting }, getValues } = useForm({
     defaultValues: {
       email: null,
@@ -55,7 +57,12 @@ const Register = () => {
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       <Grid item xs={12}>
         <div className="register-form">
-          <Typography variant="h4">Registrarse</Typography>
+          {
+            registered ?
+              <Typography variant="h4">Se ha enviado un correo de verificación para que verifiques tu cuenta.</Typography>
+            :
+              <>
+                <Typography variant="h4">Registrarse</Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
               name="email"
@@ -131,6 +138,8 @@ const Register = () => {
               {isSubmitting ? 'Registrando...' : 'Registrarse'}
             </Button>
           </form>
+              </>
+          }
         </div>
       </Grid>
     </Grid>

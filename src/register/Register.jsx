@@ -8,7 +8,6 @@ const Register = () => {
   const { control, handleSubmit, setError, formState: { errors, isSubmitting }, getValues } = useForm();
 
   const onSubmit = async (data) => {
-    setLoading(true);
     try {
       const response = await axios.post('https://el-ropero-crud.onrender.com/v1/signup/', data);
     } catch (e) {
@@ -119,7 +118,7 @@ const Register = () => {
                 />
               )}
             />
-            <Button type="submit" variant="contained" color="primary" disabled={loading}>
+            <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
               {isSubmitting ? 'Registrando...' : 'Registrarse'}
             </Button>
           </form>

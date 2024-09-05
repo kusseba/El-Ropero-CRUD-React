@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Button, TextField, Grid, Typography } from '@material-ui/core';
+import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import '../assets/style/styles.css';
 

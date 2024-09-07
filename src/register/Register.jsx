@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { toast } from 'react-toastify'; // Importa toast
-import '../assets/style/styles.css';
+import { toast } from 'react-toastify';
 
 const Register = () => {
-  const [registered, setRegistered] = useState(false);
 
   const { control, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm({
     defaultValues: {

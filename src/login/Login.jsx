@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { toast } from 'react-toastify'; // Importa toast
-import '../assets/style/styles.css';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -17,7 +16,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post('api/login', data);
+      await axios.post('https://el-ropero-crud.onrender.com/v1/', data);
       setLoggedIn(true);
       toast.success('Inicio de sesión exitoso');
     } catch (e) {

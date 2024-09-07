@@ -15,7 +15,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post('https://el-ropero-crud.onrender.com/v1/', data);
+      await axios.post('https://el-ropero-crud.onrender.com/v1/signin/', data);
       setLoggedIn(true);
       toast.success('Inicio de sesión exitoso');
     } catch (e) {

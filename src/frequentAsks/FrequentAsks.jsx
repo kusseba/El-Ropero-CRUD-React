@@ -3,7 +3,6 @@ import { Button, Grid, Typography, List, ListItem, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import '../assets/style/styles.css';
 
 const FrequentAsks = () => {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ const FrequentAsks = () => {
   useEffect(() => {
     const fetchPreguntas = async () => {
       try {
-        const response = await axios.get('/api/preguntas-frecuentes');
+        const response = await axios.get('https://el-ropero-crud.onrender.com/v1/faq');
         setPreguntas(response.data);
       } catch (error) {
         toast.error('Error al cargar las preguntas frecuentes');

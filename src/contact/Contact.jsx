@@ -1,23 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography, TextareaAutosize } from '@mui/material';
 import axios from 'axios';
-import { toast } from 'react-toastify'; // Importa toast
-import '../assets/style/styles.css';
+import { toast } from 'react-toastify';
 
 const Contact = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm();
-  const [loading, setLoading] = useState(false);
+  const { control, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
   const onSubmit = async (data) => {
-    setLoading(true);
     try {
-      await axios.post('/api/contact', data);
+      await axios.post('https://el-ropero-crud.onrender.com/v1/contact', data);
       toast.success('Mensaje enviado con éxito');
     } catch (error) {
       toast.error(error.response?.data?.message || 'Error al enviar el mensaje');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -67,7 +62,7 @@ const Contact = () => {
               disabled={loading}
               className="contact-button"
             >
-              {loading ? 'Enviando...' : 'Enviar'}
+              {isSubmitting ? 'Enviando...' : 'Enviar'}
             </Button>
           </form>
         </div>

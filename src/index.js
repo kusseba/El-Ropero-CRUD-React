@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './assets/style/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Index from './index/Index';
 import Brand from './brand/Brand';
 import Category from './category/Category';
 import Product from './product/Product';
 import Register from './register/Register';
+import Login from './login/Login';
+import FrequentAsks from './frequentAsks/FrequentAsks';
+import DetailAsks from './detailAsks/DetailAsks'
+import Contact from './contact/Contact';
 
 const theme = createTheme({
   typography: {
@@ -48,6 +53,22 @@ const router = createBrowserRouter([
   {
     path: 'register',
     element: <Register />,
+  },
+  {
+    path: 'login',
+    element: <Login />,
+  },
+  {
+    path: 'frequent-asks',
+    element: <FrequentAsks />,
+  },
+  {
+    path: 'frequent-asks/:id',
+    element: <DetailAsks />,
+  },
+  {
+    path: 'contact',
+    element: <Contact />,
   },
 ]);
 

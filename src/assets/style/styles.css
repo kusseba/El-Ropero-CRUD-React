@@ -227,3 +227,155 @@ footer {
   color: red;
   margin-top: 10px;
 }
+
+.frequent-asks-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px 0px var(--shadow-color);
+  padding: 20px;
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.frequent-asks-title {
+  font-family: 'Timing', sans-serif;
+  color: var(--scrollbar-thumb-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.frequent-asks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.frequent-asks-list-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 0px var(--shadow-color);
+  transition: background-color 0.3s ease;
+}
+
+.frequent-asks-list-item:hover {
+  background-color: var(--scrollbar-thumb-color);
+  cursor: pointer;
+}
+
+.frequent-asks-link {
+  color: inherit;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.frequent-asks-link:hover {
+  text-decoration: underline;
+}
+
+.detail-asks-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px 0px var(--shadow-color);
+  padding: 20px;
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.detail-asks-title {
+  font-family: 'Timing', sans-serif;
+  color: var(--scrollbar-thumb-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.detail-asks-content {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 0px var(--shadow-color);
+  font-size: 1rem;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.contact-form {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px 0px var(--shadow-color);
+  padding: 20px;
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+.contact-title {
+  font-family: 'Timing', sans-serif;
+  color: var(--scrollbar-thumb-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contact-field {
+  margin-bottom: 15px;
+}
+
+.contact-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--scrollbar-thumb-color);
+  border-radius: 4px;
+  background: #f9f9f9;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.contact-textarea.error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.contact-button {
+  background: var(--scrollbar-thumb-color);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100%;
+}
+
+.frequent-asks-title.MuiTypography-h4,
+.detail-asks-title.MuiTypography-h4,
+.contact-title.MuiTypography-h4 {
+  font-family: 'Timing', sans-serif;
+  color: var(--scrollbar-thumb-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.frequent-asks-button.MuiButton-containedPrimary,
+.detail-asks-button.MuiButton-containedPrimary,
+.contact-button.MuiButton-containedPrimary {
+  background: var(--scrollbar-thumb-color);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100%;
+}
+
+.frequent-asks-button.MuiButton-containedPrimary:disabled,
+.detail-asks-button.MuiButton-containedPrimary:disabled,
+.contact-button.MuiButton-containedPrimary:disabled {
+  background: #ccc;
+}
+

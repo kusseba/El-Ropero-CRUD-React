@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
+import { toast } from 'react-toastify'; // Importa toast
 import '../assets/style/styles.css';
 
 const Register = () => {
   const [registered, setRegistered] = useState(false);
-  
-  const { control, handleSubmit, setError, formState: { errors, isSubmitting }, getValues } = useForm({
+
+  const { control, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm({
     defaultValues: {
-      email: null,
-      first_name: null,
-      last_name: null,
-      password: null,
-      repeat_password: null
+      email: '',
+      first_name: '',
+      last_name: '',
+      password: '',
+      repeat_password: ''
     }
   });
 
@@ -21,6 +22,7 @@ const Register = () => {
     try {
       await axios.post('https://el-ropero-crud.onrender.com/v1/signup/', data);
       setRegistered(true);
+      toast.success('Registro exitoso. Se ha enviado un correo de verificación.');
     } catch (e) {
       if (e?.response?.data) {
         let error = [];
@@ -37,15 +39,15 @@ const Register = () => {
             field: 'password',
             message: e.response.data.password
           },
-            {
-              field: 'repeat_password',
-              message: e.response.data.password
-            });
+          {
+            field: 'repeat_password',
+            message: e.response.data.password
+          });
         }
 
         if (error.length > 0) {
           error.forEach(({ field, message }) =>
-            setError(field, { type: 'manual', message })
+            toast.error(message)
           );
           return;
         }
@@ -63,81 +65,81 @@ const Register = () => {
             :
               <>
                 <Typography variant="h4">Registrarse</Typography>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-              name="email"
-              control={control}
-              rules={{ required: 'Correo electrónico es requerido' }}
-              render={({ field }) => (
-                <TextField
-                  label="Correo electrónico"
-                  {...field}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
-              )}
-            />
-            <Controller
-              name="first_name"
-              control={control}
-              rules={{ required: 'Nombre es requerido' }}
-              render={({ field }) => (
-                <TextField
-                  label="Nombre"
-                  {...field}
-                  error={!!errors.first_name}
-                  helperText={errors.first_name?.message}
-                />
-              )}
-            />
-            <Controller
-              name="last_name"
-              control={control}
-              rules={{ required: 'Apellido es requerido' }}
-              render={({ field }) => (
-                <TextField
-                  label="Apellido"
-                  {...field}
-                  error={!!errors.last_name}
-                  helperText={errors.last_name?.message}
-                />
-              )}
-            />
-            <Controller
-              name="password"
-              control={control}
-              rules={{ required: 'Contraseña es requerida' }}
-              render={({ field }) => (
-                <TextField
-                  label="Contraseña"
-                  type="password"
-                  {...field}
-                  error={!!errors.password}
-                  helperText={errors.password?.message}
-                />
-              )}
-            />
-            <Controller
-              name="repeat_password"
-              control={control}
-              rules={{ 
-                required: 'Repetir contraseña es requerido', 
-                validate: value => value === getValues('password') || 'Las contraseñas no coinciden' 
-              }}
-              render={({ field }) => (
-                <TextField
-                  label="Repetir contraseña"
-                  type="password"
-                  {...field}
-                  error={!!errors.repeat_password}
-                  helperText={errors.repeat_password?.message}
-                />
-              )}
-            />
-            <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
-              {isSubmitting ? 'Registrando...' : 'Registrarse'}
-            </Button>
-          </form>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Controller
+                    name="email"
+                    control={control}
+                    rules={{ required: 'Correo electrónico es requerido' }}
+                    render={({ field }) => (
+                      <TextField
+                        label="Correo electrónico"
+                        {...field}
+                        error={!!errors.email}
+                        helperText={errors.email?.message}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="first_name"
+                    control={control}
+                    rules={{ required: 'Nombre es requerido' }}
+                    render={({ field }) => (
+                      <TextField
+                        label="Nombre"
+                        {...field}
+                        error={!!errors.first_name}
+                        helperText={errors.first_name?.message}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="last_name"
+                    control={control}
+                    rules={{ required: 'Apellido es requerido' }}
+                    render={({ field }) => (
+                      <TextField
+                        label="Apellido"
+                        {...field}
+                        error={!!errors.last_name}
+                        helperText={errors.last_name?.message}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="password"
+                    control={control}
+                    rules={{ required: 'Contraseña es requerida' }}
+                    render={({ field }) => (
+                      <TextField
+                        label="Contraseña"
+                        type="password"
+                        {...field}
+                        error={!!errors.password}
+                        helperText={errors.password?.message}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="repeat_password"
+                    control={control}
+                    rules={{ 
+                      required: 'Repetir contraseña es requerido', 
+                      validate: value => value === getValues('password') || 'Las contraseñas no coinciden' 
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        label="Repetir contraseña"
+                        type="password"
+                        {...field}
+                        error={!!errors.repeat_password}
+                        helperText={errors.repeat_password?.message}
+                      />
+                    )}
+                  />
+                  <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
+                    {isSubmitting ? 'Registrando...' : 'Registrarse'}
+                  </Button>
+                </form>
               </>
           }
         </div>

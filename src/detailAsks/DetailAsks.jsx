@@ -13,7 +13,7 @@ const DetailAsks = () => {
   useEffect(() => {
     const fetchRespuesta = async () => {
       try {
-        const response = await axios.get(`/api/preguntas-frecuentes/${id}`);
+        const response = await axios.get(`https://el-ropero-crud.onrender.com/v1/faq/${id}`);
         setRespuesta(response.data.respuesta);
       } catch (error) {
         toast.error('Error al cargar la respuesta');

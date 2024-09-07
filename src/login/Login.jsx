@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const { control, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     defaultValues: {
@@ -28,12 +27,7 @@ const Login = () => {
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       <Grid item xs={12}>
         <div className="register-form">
-          {
-            loggedIn ?
-              <Typography variant="h4">Has iniciado sesión correctamente.</Typography>
-            :
-              <>
-                <Typography variant="h4">Iniciar sesión</Typography>
+          <Typography variant="h4">Iniciar sesión</Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Controller
                     name="email"
@@ -66,8 +60,6 @@ const Login = () => {
                     {isSubmitting ? 'Iniciando sesión...' : 'Iniciar sesión'}
                   </Button>
                 </form>
-              </>
-          }
         </div>
       </Grid>
     </Grid>

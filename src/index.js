@@ -10,8 +10,8 @@ import Category from './category/Category';
 import Product from './product/Product';
 import Register from './register/Register';
 import Login from './login/Login';
-import FrequentAsks from './frequentAsks/FrequentAsks';
-import DetailAsks from './detailAsks/DetailAsks'
+import FaqList from './faq/FaqList';
+import FaqDetail from './faq/FaqDetail'
 import Contact from './contact/Contact';
 
 const theme = createTheme({
@@ -59,12 +59,12 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: 'frequent-asks',
-    element: <FrequentAsks />,
+    path: 'faqs',
+    element: <FaqList />,
   },
   {
-    path: 'frequent-asks/:id',
-    element: <DetailAsks />,
+    path: 'faq/:id',
+    element: <FaqDetail />,
   },
   {
     path: 'contact',

@@ -32,19 +32,25 @@ const ItemSection = ({ item }) => (
         >
           {item.name}
         </Typography>
-        {!!item.offer_price &&
-          <Stack direction='row' spacing={.5} alignItems='center'>
-            <Typography variant='caption' style={{ textDecoration: 'line-through' }}>
+        {!!item.offer_price ?
+          <>
+            <Stack direction='row' spacing={.5} alignItems='center'>
+              <Typography variant='caption' style={{ textDecoration: 'line-through' }}>
+                {parseFloat(item.price).toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}
+              </Typography>
+              <Typography fontSize={14} color='#00b100' fontWeight={500}>
+                {parseFloat((((item.price - item.offer_price) / item.price) * 100).toFixed(0))}% OFF
+              </Typography>
+            </Stack>
+            <Typography fontSize={20} lineHeight={1.25} fontWeight={500}>
               {parseFloat(item.offer_price).toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}
             </Typography>
-            <Typography fontSize={14} color='#00b100' fontWeight={500}>
-              {parseFloat((((item.price - item.offer_price) / item.price) * 100).toFixed(0))}% OFF
-            </Typography>
-          </Stack>
+          </>
+          :
+          <Typography fontSize={20} lineHeight={1.25} fontWeight={500}>
+            {parseFloat(item.price).toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}
+          </Typography>
         }
-        <Typography fontSize={20} lineHeight={1.25} fontWeight={500}>
-          {parseFloat(item.price).toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}
-        </Typography>
       </CardContent>
     </Card>
   </Link>

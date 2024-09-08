@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Grid, Typography, List, ListItem, Link } from '@mui/material';
+import { Typography, List, ListItem, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const FrequentAsks = () => {
   const navigate = useNavigate();
-  const [preguntas, setPreguntas] = useState([]);
+  const [state, setState] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPreguntas = async () => {
       try {
-        const response = await axios.get('https://el-ropero-crud.onrender.com/v1/faq');
-        setPreguntas(response.data);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/faq/`);
+        setState(response.data);
       } catch (error) {
         toast.error('Error al cargar las preguntas frecuentes');
       } finally {
@@ -25,7 +25,7 @@ const FrequentAsks = () => {
   }, []);
 
   const handlePreguntaClick = (id) => {
-    navigate(`/frequent-asks/${id}`);
+    navigate(`/faq/${id}`);
   };
 
   return (
@@ -35,14 +35,14 @@ const FrequentAsks = () => {
         <Typography>Loading...</Typography>
       ) : (
         <List className="frequent-asks-list">
-          {preguntas.map((pregunta, index) => (
+          {state.map((item, index) => (
             <ListItem key={index} className="frequent-asks-list-item">
               <Link
                 className="frequent-asks-link"
-                onClick={() => handlePreguntaClick(pregunta.id)}
+                onClick={() => handlePreguntaClick(item.id)}
                 underline="hover"
               >
-                <Typography variant="body1">{pregunta.pregunta}</Typography>
+                <Typography variant="body1">{item.title}</Typography>
               </Link>
             </ListItem>
           ))}

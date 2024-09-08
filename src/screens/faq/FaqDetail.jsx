@@ -3,18 +3,17 @@ import { Typography } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../assets/style/styles.css';
 
 const DetailAsks = () => {
   const { id } = useParams();
-  const [respuesta, setRespuesta] = useState('');
+  const [state, setState] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRespuesta = async () => {
       try {
-        const response = await axios.get(`https://el-ropero-crud.onrender.com/v1/faq/${id}`);
-        setRespuesta(response.data.respuesta);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/faq/${id}`);
+        setState(response.data);
       } catch (error) {
         toast.error('Error al cargar la respuesta');
       } finally {
@@ -32,7 +31,10 @@ const DetailAsks = () => {
         {loading ? (
           <Typography>Loading...</Typography>
         ) : (
-          <Typography variant="body1">{respuesta}</Typography>
+          <>
+            <Typography variant="body1">{state.title}</Typography>
+            <Typography variant="body1">{state.detail}</Typography>
+          </>
         )}
       </div>
     </div>

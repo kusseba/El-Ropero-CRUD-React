@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Register = () => {
+  const [registered, setRegistered] = useState();
 
   const { control, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm({
     defaultValues: {
@@ -18,7 +19,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post('https://el-ropero-crud.onrender.com/v1/signup/', data);
+      await axios.post(`${process.env.REACT_APP_API_URL}/signup/`, data);
       setRegistered(true);
       toast.success('Registro exitoso. Se ha enviado un correo de verificación.');
     } catch (e) {
@@ -37,10 +38,10 @@ const Register = () => {
             field: 'password',
             message: e.response.data.password
           },
-          {
-            field: 'repeat_password',
-            message: e.response.data.password
-          });
+            {
+              field: 'repeat_password',
+              message: e.response.data.password
+            });
         }
 
         if (error.length > 0) {
@@ -60,7 +61,7 @@ const Register = () => {
           {
             registered ?
               <Typography variant="h4">Se ha enviado un correo de verificación para que verifiques tu cuenta.</Typography>
-            :
+              :
               <>
                 <Typography variant="h4">Registrarse</Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -120,9 +121,9 @@ const Register = () => {
                   <Controller
                     name="repeat_password"
                     control={control}
-                    rules={{ 
-                      required: 'Repetir contraseña es requerido', 
-                      validate: value => value === getValues('password') || 'Las contraseñas no coinciden' 
+                    rules={{
+                      required: 'Repetir contraseña es requerido',
+                      validate: value => value === getValues('password') || 'Las contraseñas no coinciden'
                     }}
                     render={({ field }) => (
                       <TextField

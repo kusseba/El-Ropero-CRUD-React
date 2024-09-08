@@ -9,10 +9,11 @@ const Contact = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post('https://el-ropero-crud.onrender.com/v1/contact', data);
+      const token = localStorage.getItem('@token');
+      await axios.post(`${process.env.REACT_APP_API_URL}/contact/`, data, { headers: { 'Authorization': `Token ${token}` } });
       toast.success('Mensaje enviado con éxito');
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Error al enviar el mensaje');
+    } catch {
+      toast.error('Error al enviar el mensaje');
     }
   };
 
@@ -59,7 +60,7 @@ const Contact = () => {
               type="submit"
               variant="contained"
               color="primary"
-              disabled={loading}
+              disabled={isSubmitting}
               className="contact-button"
             >
               {isSubmitting ? 'Enviando...' : 'Enviar'}

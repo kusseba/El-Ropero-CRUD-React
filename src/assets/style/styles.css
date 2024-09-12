@@ -166,9 +166,9 @@ footer {
 .register-form {
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0px 0px 15px 0px var(--shadow-color);
+  box-shadow: 0px 0px 9px 0px var(--shadow-color);
   padding: 20px;
-  max-width: 600px;
+  max-width: 500px;
   margin: 50px auto;
 }
 
@@ -177,34 +177,6 @@ footer {
   color: var(--scrollbar-thumb-color);
   margin-bottom: 20px;
   text-align: center;
-}
-
-.register-form .MuiTextField-root {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.register-form .MuiTextField-root .MuiFormLabel-root {
-  font-family: 'Montserrat', sans-serif;
-  color: var(--scrollbar-thumb-color);
-  position: static;
-  transform: none;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.register-form .MuiTextField-root .MuiInputBase-root {
-  border-radius: 4px;
-  border: 1px solid var(--scrollbar-thumb-color);
-  background: #f9f9f9;
-}
-
-.register-form .MuiTextField-root.Mui-error .MuiInputBase-root {
-  border-color: red;
-}
-
-.register-form .MuiTextField-root .MuiInputBase-input {
-  padding: 10px;
 }
 
 .register-form .MuiButton-containedPrimary {

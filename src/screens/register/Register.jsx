@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const [registered, setRegistered] = useState();
 
-  const { control, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm({
+  const { control, handleSubmit, formState: { errors, isSubmitting }, getValues, setError } = useForm({
     defaultValues: {
       email: '',
       first_name: '',
@@ -59,9 +60,11 @@ const Register = () => {
       <Grid item xs={12}>
         <div className="register-form">
           {
-            registered ?
-              <Typography variant="h4">Se ha enviado un correo de verificación para que verifiques tu cuenta.</Typography>
-              :
+            registered ? (
+              <Typography variant="h4">
+                Se ha enviado un correo de verificación para que verifiques tu cuenta.
+              </Typography>
+            ) : (
               <>
                 <Typography variant="h4">Registrarse</Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -75,35 +78,47 @@ const Register = () => {
                         {...field}
                         error={!!errors.email}
                         helperText={errors.email?.message}
+                        fullWidth
+                        margin="normal"
                       />
                     )}
                   />
-                  <Controller
-                    name="first_name"
-                    control={control}
-                    rules={{ required: 'Nombre es requerido' }}
-                    render={({ field }) => (
-                      <TextField
-                        label="Nombre"
-                        {...field}
-                        error={!!errors.first_name}
-                        helperText={errors.first_name?.message}
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Controller
+                        name="first_name"
+                        control={control}
+                        rules={{ required: 'Nombre es requerido' }}
+                        render={({ field }) => (
+                          <TextField
+                            label="Nombre"
+                            {...field}
+                            error={!!errors.first_name}
+                            helperText={errors.first_name?.message}
+                            fullWidth
+                            margin="normal"
+                          />
+                        )}
                       />
-                    )}
-                  />
-                  <Controller
-                    name="last_name"
-                    control={control}
-                    rules={{ required: 'Apellido es requerido' }}
-                    render={({ field }) => (
-                      <TextField
-                        label="Apellido"
-                        {...field}
-                        error={!!errors.last_name}
-                        helperText={errors.last_name?.message}
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Controller
+                        name="last_name"
+                        control={control}
+                        rules={{ required: 'Apellido es requerido' }}
+                        render={({ field }) => (
+                          <TextField
+                            label="Apellido"
+                            {...field}
+                            error={!!errors.last_name}
+                            helperText={errors.last_name?.message}
+                            fullWidth
+                            margin="normal"
+                          />
+                        )}
                       />
-                    )}
-                  />
+                    </Grid>
+                  </Grid>
                   <Controller
                     name="password"
                     control={control}
@@ -115,6 +130,8 @@ const Register = () => {
                         {...field}
                         error={!!errors.password}
                         helperText={errors.password?.message}
+                        fullWidth
+                        margin="normal"
                       />
                     )}
                   />
@@ -132,15 +149,25 @@ const Register = () => {
                         {...field}
                         error={!!errors.repeat_password}
                         helperText={errors.repeat_password?.message}
+                        fullWidth
+                        margin="normal"
                       />
                     )}
                   />
-                  <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={isSubmitting}
+                    fullWidth
+                  >
                     {isSubmitting ? 'Registrando...' : 'Registrarse'}
                   </Button>
                 </form>
               </>
+            )
           }
+          <ToastContainer position="bottom-center" />
         </div>
       </Grid>
     </Grid>

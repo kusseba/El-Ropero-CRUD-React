@@ -6,9 +6,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
-  const [registered, setRegistered] = useState(false);
+  const [registered, setRegistered] = useState();
 
-  const { control, handleSubmit, setError, formState: { errors, isSubmitting }, getValues } = useForm({
+  const { control, handleSubmit, formState: { errors, isSubmitting }, getValues, setError } = useForm({
     defaultValues: {
       email: '',
       first_name: '',
@@ -25,34 +25,45 @@ const Register = () => {
       toast.success('Registro exitoso. Se ha enviado un correo de verificación.');
     } catch (e) {
       if (e?.response?.data) {
-        let errorData = e.response.data;
+        let error = [];
 
-        if (errorData.email) {
-          setError('email', { type: 'manual', message: errorData.email });
+        if (e.response.data.email) {
+          error.push({
+            field: 'email',
+            message: e.response.data.email
+          });
         }
 
-        if (errorData.password) {
-          setError('password', { type: 'manual', message: errorData.password });
-          setError('repeat_password', { type: 'manual', message: 'Las contraseñas no coinciden' });
+        if (e.response.data.password) {
+          error.push({
+            field: 'password',
+            message: e.response.data.password
+          },
+            {
+              field: 'repeat_password',
+              message: e.response.data.password
+            });
         }
 
-        if (!errorData.email && !errorData.password) {
-          toast.error('Error inesperado en el registro.');
+        if (error.length > 0) {
+          error.forEach(({ field, message }) =>
+            toast.error(message)
+          );
+          return;
         }
-      } else {
-        toast.error('Error de red. Por favor, intenta de nuevo.');
       }
     }
   };
 
   return (
-    <>
-      <ToastContainer />
-      <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={12}>
-          <div className="register-form">
-            {registered ? (
-              <Typography variant="h4">Se ha enviado un correo de verificación para que verifiques tu cuenta.</Typography>
+    <Grid container spacing={2} justifyContent="center" alignItems="center">
+      <Grid item xs={12}>
+        <div className="register-form">
+          {
+            registered ? (
+              <Typography variant="h4">
+                Se ha enviado un correo de verificación para que verifiques tu cuenta.
+              </Typography>
             ) : (
               <>
                 <Typography variant="h4">Registrarse</Typography>
@@ -72,36 +83,42 @@ const Register = () => {
                       />
                     )}
                   />
-                  <Controller
-                    name="first_name"
-                    control={control}
-                    rules={{ required: 'Nombre es requerido' }}
-                    render={({ field }) => (
-                      <TextField
-                        label="Nombre"
-                        {...field}
-                        error={!!errors.first_name}
-                        helperText={errors.first_name?.message}
-                        fullWidth
-                        margin="normal"
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Controller
+                        name="first_name"
+                        control={control}
+                        rules={{ required: 'Nombre es requerido' }}
+                        render={({ field }) => (
+                          <TextField
+                            label="Nombre"
+                            {...field}
+                            error={!!errors.first_name}
+                            helperText={errors.first_name?.message}
+                            fullWidth
+                            margin="normal"
+                          />
+                        )}
                       />
-                    )}
-                  />
-                  <Controller
-                    name="last_name"
-                    control={control}
-                    rules={{ required: 'Apellido es requerido' }}
-                    render={({ field }) => (
-                      <TextField
-                        label="Apellido"
-                        {...field}
-                        error={!!errors.last_name}
-                        helperText={errors.last_name?.message}
-                        fullWidth
-                        margin="normal"
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Controller
+                        name="last_name"
+                        control={control}
+                        rules={{ required: 'Apellido es requerido' }}
+                        render={({ field }) => (
+                          <TextField
+                            label="Apellido"
+                            {...field}
+                            error={!!errors.last_name}
+                            helperText={errors.last_name?.message}
+                            fullWidth
+                            margin="normal"
+                          />
+                        )}
                       />
-                    )}
-                  />
+                    </Grid>
+                  </Grid>
                   <Controller
                     name="password"
                     control={control}
@@ -144,15 +161,16 @@ const Register = () => {
                     disabled={isSubmitting}
                     fullWidth
                   >
-                    {isSubmitting ? 'Registrando' : 'Registrarse'}
+                    {isSubmitting ? 'Registrando...' : 'Registrarse'}
                   </Button>
                 </form>
               </>
-            )}
-          </div>
-        </Grid>
+            )
+          }
+          <ToastContainer position="bottom-center" />
+        </div>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

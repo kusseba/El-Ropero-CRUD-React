@@ -45,7 +45,6 @@ const Login = () => {
 
   return (
     <>
-      <ToastContainer />
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={12}>
           <div className="register-form">
@@ -92,6 +91,17 @@ const Login = () => {
                 {isSubmitting ? 'Iniciando sesión' : 'Iniciar sesión'}
               </Button>
             </form>
+            <div>
+              <ToastContainer
+                position="bottom-center"
+                autoClose={3000}
+                hideProgressBar
+                closeOnClick
+                pauseOnHover
+                draggable
+                limit={1}
+              />
+            </div>
           </div>
         </Grid>
       </Grid>

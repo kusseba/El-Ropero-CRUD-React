@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
-  const [registered, setRegistered] = useState();
+  const [registered, setRegistered] = useState(false);
 
-  const { control, handleSubmit, formState: { errors, isSubmitting }, getValues } = useForm({
+  const { control, handleSubmit, setError, formState: { errors, isSubmitting }, getValues } = useForm({
     defaultValues: {
       email: '',
       first_name: '',
@@ -24,44 +25,35 @@ const Register = () => {
       toast.success('Registro exitoso. Se ha enviado un correo de verificación.');
     } catch (e) {
       if (e?.response?.data) {
-        let error = [];
+        let errorData = e.response.data;
 
-        if (e.response.data.email) {
-          error.push({
-            field: 'email',
-            message: e.response.data.email
-          });
+        if (errorData.email) {
+          setError('email', { type: 'manual', message: errorData.email });
         }
 
-        if (e.response.data.password) {
-          error.push({
-            field: 'password',
-            message: e.response.data.password
-          },
-            {
-              field: 'repeat_password',
-              message: e.response.data.password
-            });
+        if (errorData.password) {
+          setError('password', { type: 'manual', message: errorData.password });
+          setError('repeat_password', { type: 'manual', message: 'Las contraseñas no coinciden' });
         }
 
-        if (error.length > 0) {
-          error.forEach(({ field, message }) =>
-            toast.error(message)
-          );
-          return;
+        if (!errorData.email && !errorData.password) {
+          toast.error('Error inesperado en el registro.');
         }
+      } else {
+        toast.error('Error de red. Por favor, intenta de nuevo.');
       }
     }
   };
 
   return (
-    <Grid container spacing={2} justifyContent="center" alignItems="center">
-      <Grid item xs={12}>
-        <div className="register-form">
-          {
-            registered ?
+    <>
+      <ToastContainer />
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
+        <Grid item xs={12}>
+          <div className="register-form">
+            {registered ? (
               <Typography variant="h4">Se ha enviado un correo de verificación para que verifiques tu cuenta.</Typography>
-              :
+            ) : (
               <>
                 <Typography variant="h4">Registrarse</Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -75,6 +67,8 @@ const Register = () => {
                         {...field}
                         error={!!errors.email}
                         helperText={errors.email?.message}
+                        fullWidth
+                        margin="normal"
                       />
                     )}
                   />
@@ -88,6 +82,8 @@ const Register = () => {
                         {...field}
                         error={!!errors.first_name}
                         helperText={errors.first_name?.message}
+                        fullWidth
+                        margin="normal"
                       />
                     )}
                   />
@@ -101,6 +97,8 @@ const Register = () => {
                         {...field}
                         error={!!errors.last_name}
                         helperText={errors.last_name?.message}
+                        fullWidth
+                        margin="normal"
                       />
                     )}
                   />
@@ -115,6 +113,8 @@ const Register = () => {
                         {...field}
                         error={!!errors.password}
                         helperText={errors.password?.message}
+                        fullWidth
+                        margin="normal"
                       />
                     )}
                   />
@@ -132,18 +132,27 @@ const Register = () => {
                         {...field}
                         error={!!errors.repeat_password}
                         helperText={errors.repeat_password?.message}
+                        fullWidth
+                        margin="normal"
                       />
                     )}
                   />
-                  <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
-                    {isSubmitting ? 'Registrando...' : 'Registrarse'}
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={isSubmitting}
+                    fullWidth
+                  >
+                    {isSubmitting ? 'Registrando' : 'Registrarse'}
                   </Button>
                 </form>
               </>
-          }
-        </div>
+            )}
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

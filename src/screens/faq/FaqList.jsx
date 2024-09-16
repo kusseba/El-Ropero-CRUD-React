@@ -39,7 +39,7 @@ const FrequentAsks = () => {
             <ListItem key={index} className="frequent-asks-list-item">
               <Link
                 className="frequent-asks-link"
-                onClick={() => handlePreguntaClick(item.id)}
+                to={`/faq/${id}`}
                 underline="hover"
               >
                 <Typography variant="body1">{item.title}</Typography>

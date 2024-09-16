@@ -39,7 +39,7 @@ const FrequentAsks = () => {
             <ListItem key={index} className="frequent-asks-list-item">
               <Link
                 className="frequent-asks-link"
-                to={`/faq/${id}`}
+                to={`/faq/${item.id}`}
                 underline="hover"
               >
                 <Typography variant="body1">{item.title}</Typography>

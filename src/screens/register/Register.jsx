@@ -56,7 +56,7 @@ const Register = () => {
   };
 
   return (
-    <Grid container spacing={2} justifyContent="center" alignItems="center">
+    <Grid container spacing={{ xs: 0, sm: 2}} justifyContent="center" alignItems="center">
       <Grid item xs={12}>
         <div className="register-form">
           {

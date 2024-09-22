@@ -10,8 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import 'react-multi-carousel/lib/styles.css';
-import ProductImage from '../product/ProductImage.jsx';
-import ProductInfo from '../product/ProductInfo.jsx'
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -24,6 +23,158 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
+
+{/*Extrae la imagen del producto en la pirmera parte de la Grilla de producto*/}
+const ProductImage = ({Id}) => {
+  const [imageUrl, setImageUrl] = useState('');
+
+  useEffect(() => {
+      const fetchProductImage = async () => {
+          try {
+              const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}`);
+              const imageUrlFromApi = response.data.image;
+              setImageUrl(imageUrlFromApi);
+          } catch (error) {
+              console.error('Error fetching product image: ', error);
+              
+          }
+      };
+      fetchProductImage();
+  }, [Id]);
+
+  return (
+    <div>
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt="Product"
+          style={{ width: '80%', height: 'auto' }}
+        />
+      ) : (
+        <p> ...Loading </p>
+      )}
+    </div>
+  );
+};
+
+
+{/*Agrega los datos como nombre y precia en la segunda parte de la grilla desde la API. */}
+const ProductCard = ({Id}) => {
+  const [productData, setProductData] = useState({
+      name: '',
+      price: '',
+      discoount: ''
+  });
+
+  useEffect(() => {
+      const fetchProductData = async () => {
+          try {
+              const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}`);
+              const productInfo = response.data;
+              setProductData({
+                  name: productInfo.name || 'Producto no nombrado',
+                  price: productInfo.price ? `${productInfo.price} $` : 'Precio no registrado',                
+                
+                });
+          } catch (error) {
+              console.error('Error fetching product data:', error);
+              
+          }
+      };
+      fetchProductData();
+  }, [Id]);
+
+  return(
+      <Card> 
+      <React.Fragment>
+        <CardContent>
+          <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
+          </Typography>
+          <br/>
+          <Typography variant="h5" component="div">
+            {productData.name}
+          </Typography>
+          <br/>
+          <Typography variant="body2">
+            {productData.price}
+            <br />
+          </Typography>
+          <br/>
+          <br/>
+          <br/>
+        </CardContent>     
+        <CardActions>
+          <Button size="small" sx={{ width: '50%', backgroundColor: '#020a0d', color: '#f9ff76', borderRadius: '10px' }}>
+            Comprar
+          </Button>
+        </CardActions>
+        <CardActions>
+          <Button size="small" sx={{ width: '50%', backgroundColor: '#020a0d', color: '#f9ff76', borderRadius: '10px' }}>
+            Agregar al Carrito
+          </Button>
+        </CardActions>
+      </React.Fragment>
+    </Card>
+  );
+}
+
+
+{/*Tercera parte crea una Grid donde se muestran los elementos de las tres primeros Id de los Productos en la API */}
+const ProductCardList = ({product}) => (
+  <Card sx={{maxWidth: 150}}>
+    <CardMedia
+      sx={{height: 140, width: '100px'}}
+      image={product.image}
+      title={product.name}
+    />
+    <CardContent>
+      <Typography variant="body2" component="div">
+        {product.name}
+      </Typography>
+      <Typography variant="body2" component="div">
+        {product.price}
+      </Typography>
+    </CardContent>
+  </Card>
+);
+
+const ThreeGridList = () => {
+  const [products, setProducts] = useState([
+    {image: '', name: '', price: ''},
+    {image: '', name: '', price: ''},
+    {image: '', name: '', price: ''}
+  ]);
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}`);
+        const data = response.data;
+        setProducts([data[0], data[1], data[2]]);
+      } catch(error) {
+        console.error('Error fetching products data:', error);
+      }
+    };
+    fetchProductData();
+  }, []);
+
+  return (
+    <Grid item xs={6} md={12}>
+      <Grid container spacing={3}>
+        <Grid item xs>
+          <ProductCardList product={products[0]}/>  
+        </Grid>
+        <Grid item xs>
+          <ProductCardList product={products[1]}/>  
+        </Grid>
+        <Grid item xs>
+          <ProductCardList product={products[2]}/>  
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+
+};
 
 
 const Product = () => {
@@ -46,7 +197,7 @@ const Product = () => {
           </Item>
         </Grid>
         <Grid item xs={6} md={12}>
-          
+          <ThreeGridList/>
         </Grid>
       </Grid>
     </Box>

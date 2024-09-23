@@ -32,7 +32,8 @@ const ProductImage = ({Id}) => {
   useEffect(() => {
       const fetchProductImage = async () => {
           try {
-              const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}`);
+const token = localStorage.getItem('@token');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}/`, { headers: { 'Authorization': `Token ${token}` } });
               const imageUrlFromApi = response.data.image;
               setImageUrl(imageUrlFromApi);
           } catch (error) {
@@ -70,7 +71,8 @@ const ProductInfo = ({Id}) => {
   useEffect(() => {
       const fetchProductData = async () => {
           try {
-              const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}`);
+const token = localStorage.getItem('@token');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}/`, { headers: { 'Authorization': `Token ${token}` } });
               const productInfo = response.data;
               setProductData({
                   name: productInfo.name || 'Producto no nombrado',
@@ -149,7 +151,8 @@ const ThreeGridList = () => {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/`);
+const token = localStorage.getItem('@token');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/produc/${Id}/`, { headers: { 'Authorization': `Token ${token}` } });
         const data = response.data;
         setProducts(data[0], data[1], data[3]);
       } catch (error) {

@@ -12,7 +12,13 @@ const ProductCard = ({Id}) => {
     useEffect(() => {
         const fetchProductData = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}`);
+                const token = localStorage.getItem('@token');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/product/${Id}/`, { headers: { 'Authorization': `Token ${token}` } });
+
+
+
+
+
                 const productInfo = response.data;
                 setProductData({
                     name: productInfo.name || 'Producto no nombrado',

@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: 'product',
+    path: 'product/:id',
     element: <ProtectedRouter children={<Product />} redirectPath='/signin' />,
     errorElement: <ErrorPage />
   },

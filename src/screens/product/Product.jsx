@@ -200,9 +200,11 @@ const Product = () => {
             <ProductInfo/>
           </Item>
         </Grid>
+        {/*
         <Grid item xs={6} md={12}>
           <ThreeGridList/>
         </Grid>
+        */}        
       </Grid>
     </Box>
   );

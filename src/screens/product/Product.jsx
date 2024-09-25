@@ -151,10 +151,10 @@ const ThreeGridList = () => {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-const token = localStorage.getItem('@token');
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/produc/${Id}/`, { headers: { 'Authorization': `Token ${token}` } });
-        const data = response.data;
-        setProducts(data[0], data[1], data[3]);
+//const token = localStorage.getItem('@token');
+      //const response = await axios.get(`${process.env.REACT_APP_API_URL}/produc/${Id}/`, { headers: { 'Authorization': `Token ${token}` } });
+        //const data = response.data;
+        //setProducts(data[0], data[1], data[3]);
       } catch (error) {
         console.error('Error fetching products data:', error);
       }

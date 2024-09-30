@@ -13,6 +13,9 @@ import Login from './screens/login/Login';
 import FaqList from './screens/faq/FaqList';
 import FaqDetail from './screens/faq/FaqDetail'
 import Contact from './screens/contact/Contact';
+import PasswordReset from './screens/resetPassword/PasswordReset';
+import SendResetPasswordEmail from './screens/resetPassword/SendResetPassword';
+import VerifyAccount from './screens/verifyAccount/VerifyAccount';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +51,24 @@ const router = createBrowserRouter([
   {
     path: 'contact',
     element: <ProtectedRouter children={<Contact />} redirectPath='/signin' />,
+    errorElement: <ErrorPage />
+  },
+
+  {
+    path: 'verify-account',
+    element: <UnProtectedRouter children={<VerifyAccount />} redirectPath='/' />,
+    errorElement: <ErrorPage />
+  },
+
+  {
+    path: 'send-reset-password',
+    element: <UnProtectedRouter children={<SendResetPasswordEmail />} redirectPath='/' />,
+    errorElement: <ErrorPage />
+  },
+
+  {
+    path: 'password-reset',
+    element: <UnProtectedRouter children={<PasswordReset />} redirectPath='/' />,
     errorElement: <ErrorPage />
   },
 ]);

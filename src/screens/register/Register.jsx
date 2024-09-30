@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast,} from 'react-toastify';
 
 const Register = () => {
   const [registered, setRegistered] = useState();
@@ -167,7 +166,9 @@ const Register = () => {
               </>
             )
           }
-          <ToastContainer position="bottom-center" />
+          <div class="login-link">
+            <a href="/signin">¿Ya tienes una cuenta? Inicia Sesion</a>
+          </div>
         </div>
       </Grid>
     </Grid>

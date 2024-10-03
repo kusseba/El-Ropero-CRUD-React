@@ -18,11 +18,11 @@ const PasswordReset = () => {
   });
 
   useEffect(() => {
-    const uidb64 = searchParams.get('uidb64');
+    const uidb = searchParams.get('uidb');
     const token = searchParams.get('token');
 
-    if (uidb64 && token) {
-      axios.get(`${process.env.REACT_APP_API_URL}/password-reset/${uidb64}/${token}/`)
+    if (uidb && token) {
+      axios.get(`${process.env.REACT_APP_API_URL}/password-reset/${uidb}/${token}/`)
         .then(() => {
           setValidLink(true);
           setLoading(false);
@@ -39,7 +39,7 @@ const PasswordReset = () => {
   }, [searchParams, navigate]);
 
   const onSubmit = async (data) => {
-    const uidb64 = searchParams.get('uidb64');
+    const uidb = searchParams.get('uidb');
     const token = searchParams.get('token');
 
     if (data.newPassword !== data.confirmNewPassword) {
@@ -49,7 +49,7 @@ const PasswordReset = () => {
 
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/password-reset-complete/`, {
-        uidb64,
+        uidb,
         token,
         password: data.newPassword
       });

@@ -5,13 +5,11 @@ import { Button, Typography, CircularProgress, Grid } from '@mui/material';
 import { toast } from 'react-toastify';
 
 const VerifyAccount = () => {
-  const [searchParams] = useSearchParams();
+  const { uidb, token } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { uidb, token } = useParams();
-    
     if (uidb && token) {
       axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, { uidb, token })
         .then(() => {

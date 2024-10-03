@@ -26,3 +26,13 @@ export function UnProtectedRouter({
   if (profile) return <Navigate to={redirectPath} replace />;
   return children;
 }
+
+export function NormalRouter({ children }) {
+  return(
+      <>
+        <Header />
+        {children}
+        <Footer />
+      </>
+  );
+}

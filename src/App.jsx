@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { ProtectedRouter, UnProtectedRouter } from './components/ManageRoutes';
+import { ProtectedRouter, UnProtectedRouter, NormalRouter } from './components/ManageRoutes';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -20,12 +20,12 @@ import VerifyAccount from './screens/verifyAccount/VerifyAccount';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Index />,
+    element: <NormalRouter children={<Index />} />,
     errorElement: <ErrorPage />
   },
   {
     path: 'product/:id',
-    element: <Product />,
+    element: <NormalRouter children={<Product />} />,
     errorElement: <ErrorPage />
   },
   {
@@ -40,12 +40,12 @@ const router = createBrowserRouter([
   },
   {
     path: 'faq',
-    element: <FaqList />,
+    element: <NormalRouter children={<FaqList />} />,
     errorElement: <ErrorPage />
   },
   {
     path: 'faq/:id',
-    element: <FaqDetail />,
+    element: <NormalRouter children={<FaqDetail />} />,
     errorElement: <ErrorPage />
   },
   {
@@ -62,13 +62,13 @@ const router = createBrowserRouter([
 
   {
     path: 'send-reset-password',
-    element: <SendResetPasswordEmail />,
+    element: <NormalRouter children={<SendResetPasswordEmail />} />,
     errorElement: <ErrorPage />
   },
 
   {
     path: 'password-reset',
-    element: <PasswordReset />,
+    element: <NormalRouter children={<PasswordReset />} />,
     errorElement: <ErrorPage />
   },
 ]);

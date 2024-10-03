@@ -13,6 +13,8 @@ const VerifyAccount = () => {
     const uidb = searchParams.get('uidb');
     const token = searchParams.get('token');
 
+    console.log(uidb, token, searchParams)
+
     if (uidb && token) {
       axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, { uidb, token })
         .then(() => {

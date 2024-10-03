@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Typography, CircularProgress, Grid } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -10,19 +10,15 @@ const VerifyAccount = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const uidb = searchParams.get('uidb');
-    const token = searchParams.get('token');
-
-    console.log(uidb, token, searchParams)
-
+    const { uidb, token } = useParams;
+    
     if (uidb && token) {
       axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, { uidb, token })
         .then(() => {
           toast.success('Cuenta verificada exitosamente.');
           setLoading(false);
         })
-        .catch((e) => {
-          console.log(e)
+        .catch(() => {
           toast.error('Error al verificar la cuenta. Inténtalo de nuevo.');
         });
     } else {

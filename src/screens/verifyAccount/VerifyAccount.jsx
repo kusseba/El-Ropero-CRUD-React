@@ -14,7 +14,7 @@ const VerifyAccount = () => {
     const token = searchParams.get('token');
 
     if (uidb && token) {
-      axios.post(`/verify-account/`, { uidb, token })
+      axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, { uidb, token })
         .then(() => {
           toast.success('Cuenta verificada exitosamente.');
           setLoading(false);
@@ -25,7 +25,6 @@ const VerifyAccount = () => {
         });
     } else {
       toast.error('Parámetros inválidos.');
-      navigate('/login');
     }
   }, [searchParams, navigate]);
 

@@ -9,19 +9,28 @@ const VerifyAccount = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-const verify = () => {
-      axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, { uidb: uidb, token: token })
-        .then(() => {
-          toast.success('Cuenta verificada exitosamente.');
-          setLoading(false);
-        })
-        .catch(() => {
-          toast.error('Error al verificar la cuenta. Inténtalo de nuevo.');
-        });
+useEffect(() => {
+  const verifyAccount = async () => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, {
+        uidb: uidb,
+        token: token,
+      });
+navigate('/signin', { replace: true })
+      toast.success('Cuenta verificada exitosamente.');
+    } catch (error) {
+      toast.error('Error al verificar la cuenta. Inténtalo de nuevo.');
+    } finally {
+      setLoading(false);
     }
-verify();
-  }, []);
+  };
+
+  if (uidb && token) {
+    verifyAccount();
+  } else {
+    console.error('uidb o token no están definidos');
+  }
+}, []);
 
   return (
     <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>

@@ -10,7 +10,7 @@ const VerifyAccount = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { uidb, token } = useParams;
+    const { uidb, token } = useParams();
     
     if (uidb && token) {
       axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, { uidb, token })

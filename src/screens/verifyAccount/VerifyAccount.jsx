@@ -22,7 +22,7 @@ const VerifyAccount = () => {
     } else {
       toast.error('Parámetros inválidos.');
     }
-  }, [searchParams, navigate]);
+  }, []);
 
   return (
     <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>

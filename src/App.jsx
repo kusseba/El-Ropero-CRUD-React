@@ -20,12 +20,12 @@ import VerifyAccount from './screens/verifyAccount/VerifyAccount';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <ProtectedRouter children={<Index />} redirectPath='/signin' />,
+    element: <Index />,
     errorElement: <ErrorPage />
   },
   {
     path: 'product/:id',
-    element: <ProtectedRouter children={<Product />} redirectPath='/signin' />,
+    element: <Product />,
     errorElement: <ErrorPage />
   },
   {

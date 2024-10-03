@@ -56,19 +56,19 @@ const router = createBrowserRouter([
 
   {
     path: 'verify-account',
-    element: <UnProtectedRouter children={<VerifyAccount />} redirectPath='/' />,
+    element: <VerifyAccount />,
     errorElement: <ErrorPage />
   },
 
   {
     path: 'send-reset-password',
-    element: <UnProtectedRouter children={<SendResetPasswordEmail />} redirectPath='/' />,
+    element: <SendResetPasswordEmail />,
     errorElement: <ErrorPage />
   },
 
   {
     path: 'password-reset',
-    element: <UnProtectedRouter children={<PasswordReset />} redirectPath='/' />,
+    element: <PasswordReset />,
     errorElement: <ErrorPage />
   },
 ]);

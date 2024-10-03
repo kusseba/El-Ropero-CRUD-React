@@ -55,7 +55,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path: 'verify-account',
+    path: 'verify-account/:uidb/:token',
     element: <VerifyAccount />,
     errorElement: <ErrorPage />
   },

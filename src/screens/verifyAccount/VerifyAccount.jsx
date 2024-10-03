@@ -10,8 +10,8 @@ const VerifyAccount = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (uidb && token) {
-      axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, { uidb, token })
+const verify = () => {
+      axios.post(`${process.env.REACT_APP_API_URL}/verify-account/`, { uidb: uidb, token: token })
         .then(() => {
           toast.success('Cuenta verificada exitosamente.');
           setLoading(false);
@@ -19,9 +19,8 @@ const VerifyAccount = () => {
         .catch(() => {
           toast.error('Error al verificar la cuenta. Inténtalo de nuevo.');
         });
-    } else {
-      toast.error('Parámetros inválidos.');
     }
+verify();
   }, []);
 
   return (

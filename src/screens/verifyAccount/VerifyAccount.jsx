@@ -20,8 +20,8 @@ const VerifyAccount = () => {
           setLoading(false);
         })
         .catch((e) => {
-          toast.error('Error al verificar la cuenta. Inténtalo de nuevo.', e);
-          setLoading(false);
+          console.log(e)
+          toast.error('Error al verificar la cuenta. Inténtalo de nuevo.');
         });
     } else {
       toast.error('Parámetros inválidos.');

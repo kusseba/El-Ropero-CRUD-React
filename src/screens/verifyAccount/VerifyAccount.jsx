@@ -10,11 +10,11 @@ const VerifyAccount = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const uidb64 = searchParams.get('uidb64');
+    const uidb = searchParams.get('uidb');
     const token = searchParams.get('token');
 
-    if (uidb64 && token) {
-      axios.post(`/verify-account/`, { uidb64, token })
+    if (uidb && token) {
+      axios.post(`/verify-account/`, { uidb, token })
         .then(() => {
           toast.success('Cuenta verificada exitosamente.');
           setLoading(false);

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { ProtectedRouter, UnProtectedRouter } from './components/ManageRoutes';
+import { ProtectedRouter, UnProtectedRouter, NormalRouter } from './components/ManageRoutes';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -13,16 +13,19 @@ import Login from './screens/login/Login';
 import FaqList from './screens/faq/FaqList';
 import FaqDetail from './screens/faq/FaqDetail'
 import Contact from './screens/contact/Contact';
+import PasswordReset from './screens/resetPassword/PasswordReset';
+import SendResetPasswordEmail from './screens/resetPassword/SendResetPassword';
+import VerifyAccount from './screens/verifyAccount/VerifyAccount';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <ProtectedRouter children={<Index />} redirectPath='/signin' />,
+    element: <NormalRouter children={<Index />} />,
     errorElement: <ErrorPage />
   },
   {
     path: 'product/:id',
-    element: <ProtectedRouter children={<Product />} redirectPath='/signin' />,
+    element: <NormalRouter children={<Product />} />,
     errorElement: <ErrorPage />
   },
   {
@@ -37,17 +40,35 @@ const router = createBrowserRouter([
   },
   {
     path: 'faq',
-    element: <FaqList />,
+    element: <NormalRouter children={<FaqList />} />,
     errorElement: <ErrorPage />
   },
   {
     path: 'faq/:id',
-    element: <FaqDetail />,
+    element: <NormalRouter children={<FaqDetail />} />,
     errorElement: <ErrorPage />
   },
   {
     path: 'contact',
     element: <ProtectedRouter children={<Contact />} redirectPath='/signin' />,
+    errorElement: <ErrorPage />
+  },
+
+  {
+    path: 'verify-account/:uidb/:token',
+    element: <VerifyAccount />,
+    errorElement: <ErrorPage />
+  },
+
+  {
+    path: 'send-reset-password',
+    element: <NormalRouter children={<SendResetPasswordEmail />} />,
+    errorElement: <ErrorPage />
+  },
+
+  {
+    path: 'password-reset',
+    element: <NormalRouter children={<PasswordReset />} />,
     errorElement: <ErrorPage />
   },
 ]);

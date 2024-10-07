@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const ItemCarousel = ({ item }) => (
-  <Link to='/'>
+  <Link to={`/product/${item.id}`}>
     <Card style={{ border: '1px solid #d4d4d4', backgroundColor: '#FFFFFF', boxShadow: '0 2px 8px 0 rgba(0,0,0,.3)', marginRight: 10, height: '100%' }}>
       <CardMedia
         loading='eager'

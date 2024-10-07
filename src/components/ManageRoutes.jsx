@@ -24,5 +24,21 @@ export function UnProtectedRouter({
 }) {
   const profile = useSelector(selectorProfile);
   if (profile) return <Navigate to={redirectPath} replace />;
-  return children;
+  return(
+      <>
+        <Header />
+        {children}
+        <Footer />
+      </>
+);
+}
+
+export function NormalRouter({ children }) {
+  return(
+      <>
+        <Header />
+        {children}
+        <Footer />
+      </>
+  );
 }

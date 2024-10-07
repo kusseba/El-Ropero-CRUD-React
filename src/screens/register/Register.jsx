@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { toast,} from 'react-toastify';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'; 
 
 const Register = () => {
   const [registered, setRegistered] = useState();
+  const navigate = useNavigate(); 
 
   const { control, handleSubmit, formState: { errors, isSubmitting }, getValues, setError } = useForm({
     defaultValues: {
@@ -22,6 +24,8 @@ const Register = () => {
       await axios.post(`${process.env.REACT_APP_API_URL}/signup/`, data);
       setRegistered(true);
       toast.success('Registro exitoso. Se ha enviado un correo de verificación.');
+
+      navigate('/signin');
     } catch (e) {
       if (e?.response?.data) {
         let error = [];
@@ -82,12 +86,18 @@ const Register = () => {
                       />
                     )}
                   />
-                  <Grid container spacing={{ xs: 0, sm: 2}}>
+                  <Grid container spacing={{ xs: 0, sm: 2 }}>
                     <Grid item xs={12} sm={6}>
                       <Controller
                         name="first_name"
                         control={control}
-                        rules={{ required: 'Nombre es requerido' }}
+                        rules={{
+                          required: 'Nombre es requerido',
+                          pattern: {
+                            value: /^[a-zA-ZÀ-ÿ\s]*$/,
+                            message: 'El nombre no puede contener números ni caracteres especiales'
+                          }
+                        }}
                         render={({ field }) => (
                           <TextField
                             label="Nombre"
@@ -104,7 +114,13 @@ const Register = () => {
                       <Controller
                         name="last_name"
                         control={control}
-                        rules={{ required: 'Apellido es requerido' }}
+                        rules={{
+                          required: 'Apellido es requerido',
+                          pattern: {
+                            value: /^[a-zA-ZÀ-ÿ\s]*$/,
+                            message: 'El apellido no puede contener números ni caracteres especiales'
+                          }
+                        }}
                         render={({ field }) => (
                           <TextField
                             label="Apellido"
@@ -160,14 +176,14 @@ const Register = () => {
                     disabled={isSubmitting}
                     fullWidth
                   >
-                    {isSubmitting ? 'Registrando...' : 'Registrarse'}
+                    {isSubmitting ? 'Registrando' : 'Registrarse'}
                   </Button>
                 </form>
               </>
             )
           }
-          <div class="login-link">
-            <a href="/signin">¿Ya tienes una cuenta? Inicia Sesion</a>
+          <div className="login-link">
+            <a href="/signin">¿Ya tienes una cuenta? Inicia Sesión</a>
           </div>
         </div>
       </Grid>

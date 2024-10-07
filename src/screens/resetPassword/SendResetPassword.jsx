@@ -23,35 +23,38 @@ const SendResetPasswordEmail = () => {
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       <Grid item xs={12}>
-        <Typography variant="h4">Recuperar Contraseña</Typography>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="email"
-            control={control}
-            rules={{ required: 'Correo electrónico es requerido' }}
-            render={({ field }) => (
-              <TextField
-                label="Correo electrónico"
-                {...field}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-                fullWidth
-                margin="normal"
-              />
-            )}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={isSubmitting}
-            fullWidth
-          >
-            {isSubmitting ? 'Enviando correo...' : 'Enviar correo de recuperación'}
-          </Button>
-        </form>
+        <nav className="register-form">
+          <Typography variant="h4">Recuperar Contraseña</Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name="email"
+              control={control}
+              rules={{ required: 'Correo electrónico es requerido' }}
+              render={({ field }) => (
+                <TextField
+                  label="Correo electrónico"
+                  {...field}
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  fullWidth
+                  margin="normal"
+                />
+              )}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={isSubmitting}
+              fullWidth
+            >
+              {isSubmitting ? 'Enviando correo' : 'Enviar correo de recuperación'}
+            </Button>
+          </form>
+        </nav>
       </Grid>
     </Grid>
+    
   );
 };
 

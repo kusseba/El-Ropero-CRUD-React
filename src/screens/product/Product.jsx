@@ -17,7 +17,9 @@ import Loader from '../../components/Loader';
 import {toast} from 'react-toastify';
 import Divider from '@mui/material/Divider';
 
-
+{/**Código extraido desde la página material.iu. Define la función Item para ser usada después dentro de las
+  Grid. */}
+{/**No debe sacarse a menos que se tengo otro código para Item que cumpla su misma función. */}  
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
@@ -29,16 +31,20 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
+
+{/*Funcón que extrae información en las Item de la Grid desde la API */}
 const Product = () => {
   const [state, setState] = useState();
   let {id} = useParams();
 
   useEffect(() => {getProduct()}, []);
 
+  {/*Códiog que realizar una conexión a la API de la página para extraer los datos de un producto seleccionado*/}
   const getProduct = async () => {
     try {
       const token = localStorage.getItem('@token');
       const {data} = await axios.get(`${process.env.REACT_APP_API_URL}/product/${id}/`, { headers: { 'Authorization': `Token ${token}` } });
+      {/*Los datos se extraen por medio del id del producto seleccionado por el usuario desde la Card del Index. */}
       setState(data);
     } catch {
       toast.error('Eror al iniciar sesión')
@@ -48,18 +54,17 @@ const Product = () => {
   if (!state) return <Loader/>
 
   return (
-    
       <Box sx={{
         flexGrow: 1,
         width: '70%',
-        backgroundColor: '#ffffff', /* #eeefe5 */
+        backgroundColor: '#ffffff', 
         margin: '5px auto',
         borderRadius:'5px',
         mt: 3,
         mb: 2
         }}>
-        <Grid container spacing={0}>
-          <Grid item xs={6} md={6}>
+        <Grid container spacing={0}> 
+          <Grid item xs={6} md={6}> {/*Muestra la imagen del producto en la Grid*/}
             <Item sx={{ backgroundColor: '#ffffff ', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: 'none' }}>
               <Card style={{height: '360px', boxShadow: 'none', borderRadius: '5px'}}>
                 <CardMedia
@@ -72,15 +77,14 @@ const Product = () => {
             </Item>
           </Grid>
           <Grid item xs={6} md={6}>
+          {/*Sección de la Grid que muestra los datos de 'name', 'price', 'offer_price' del producto*/}
             <Item sx={{ backgroundColor: '#ffffff', display: 'flex', justifyContent: 'left', alignItems: 'left', witdh: '100%', boxShadow: 'none'}}>
               <Stack>
               <CardContent style={{ padding: 8, height: '100%' }}>
                 <Typography variant="body2" component="div" fontSize={30}>
                   {state.name}
                 </Typography>
-                <br/>
-                
-                
+                <br/>                
                   {!!state.offer_price ?
                     <>
                       <Stack direction='row' spacing={.5} alignItems='center'>
@@ -102,6 +106,7 @@ const Product = () => {
                   }
                 
                 <br />
+                {/*Sección de la Grid que muestra los botones de compra y carrito.*/}
               </CardContent>
                 <CardActions>
                   <Button size="large" 
@@ -109,7 +114,7 @@ const Product = () => {
                   '&: hover': {
                     color: '#010101',
                     backgroundColor: '#ecece1',
-                    borderRadius: '20px'
+                    borderRadius: '40px'
                   }
                   }}>
                   Comprar
@@ -121,7 +126,7 @@ const Product = () => {
                   '&: hover': {
                     color: '#010101',
                     backgroundColor: '#ecece1',
-                    borderRadius: '20px'
+                    borderRadius: '40px'
                   }
                   }}>
                   Agregar al Carrito
@@ -141,5 +146,9 @@ const Product = () => {
       </Box>
   );
 };
+
+
+
+
 
 export default Product;

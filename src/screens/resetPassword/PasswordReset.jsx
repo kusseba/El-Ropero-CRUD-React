@@ -30,11 +30,11 @@ const PasswordReset = () => {
         .catch(() => {
           toast.error('Enlace de restablecimiento no válido.');
           setLoading(false);
-          navigate('/login');
+          navigate('/signin');
         });
     } else {
       toast.error('Parámetros inválidos.');
-      navigate('/login');
+      navigate('/signin');
     }
   }, [searchParams, navigate]);
 
@@ -54,7 +54,7 @@ const PasswordReset = () => {
         password: data.newPassword
       });
       toast.success('Contraseña restablecida con éxito.');
-      navigate('/login');
+      navigate('/signin');
     } catch (e) {
       toast.error('Error al restablecer la contraseña.');
     }
@@ -108,7 +108,7 @@ const PasswordReset = () => {
                 disabled={isSubmitting}
                 fullWidth
               >
-                {isSubmitting ? 'Restableciendo contraseña...' : 'Restablecer contraseña'}
+                {isSubmitting ? 'Restableciendo contraseña' : 'Restablecer contraseña'}
               </Button>
             </form>
           </>

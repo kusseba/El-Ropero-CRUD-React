@@ -93,6 +93,9 @@ const Login = () => {
               <div class="register-link">
                 <a href="/signup">¿No tienes una cuenta? Regístrate</a>
               </div>
+              <div class="register-link">
+                <a href="/send-reset-password">¿Has olvidado tu contraseña?</a>
+              </div>
           </div>
         </Grid>
       </Grid>

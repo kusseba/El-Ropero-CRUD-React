@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const ItemSection = ({ item }) => (
-  <Link to='/'>
+  <Link to={`/product/${item.id}`}>
     <Card style={{ height: '100%', boxShadow: 'none', borderRadius: 0 }}>
       <CardMedia
         loading='lazy'

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, List, ListItem, Link } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Typography, List, ListItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const FrequentAsks = () => {
-  const navigate = useNavigate();
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,13 +23,9 @@ const FrequentAsks = () => {
     fetchPreguntas();
   }, []);
 
-  const handlePreguntaClick = (id) => {
-    navigate(`/faq/${id}`);
-  };
-
   return (
     <div className="frequent-asks-container">
-      <Typography variant="h4" className="frequent-asks-title">Preguntas Frequentes</Typography>
+      <Typography variant="h4" className="frequent-asks-title">Preguntas Frecuentes</Typography>
       {loading ? (
         <Typography>Loading...</Typography>
       ) : (

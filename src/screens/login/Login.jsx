@@ -3,8 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast,} from 'react-toastify';
 import { setProfile } from '../../redux/main';
 
 const Login = () => {
@@ -91,17 +90,12 @@ const Login = () => {
                 {isSubmitting ? 'Iniciando sesión' : 'Iniciar sesión'}
               </Button>
             </form>
-            <div>
-              <ToastContainer
-                position="bottom-center"
-                autoClose={3000}
-                hideProgressBar
-                closeOnClick
-                pauseOnHover
-                draggable
-                limit={1}
-              />
-            </div>
+              <div className="register-link">
+                <a href="/signup">¿No tienes una cuenta? Regístrate</a>
+              </div>
+              <div className="register-link">
+                <a href="/send-reset-password">¿Has olvidado tu contraseña?</a>
+              </div>
           </div>
         </Grid>
       </Grid>

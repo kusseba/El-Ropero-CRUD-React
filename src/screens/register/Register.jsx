@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [registered, setRegistered] = useState();
@@ -32,6 +31,11 @@ const Register = () => {
             field: 'email',
             message: e.response.data.email
           });
+
+          // Mostrar un mensaje específico si el correo ya está registrado
+          if (e.response.data.email.includes('already exists')) {
+            toast.error('El correo electrónico ya está registrado. Intente con otro.');
+          }
         }
 
         if (e.response.data.password) {
@@ -47,7 +51,7 @@ const Register = () => {
 
         if (error.length > 0) {
           error.forEach(({ field, message }) =>
-            toast.error(message)
+            setError(field, { type: 'manual', message }) // Registrar errores en el formulario
           );
           return;
         }
@@ -83,12 +87,18 @@ const Register = () => {
                       />
                     )}
                   />
-                  <Grid container spacing={{ xs: 0, sm: 2}}>
+                  <Grid container spacing={{ xs: 0, sm: 2 }}>
                     <Grid item xs={12} sm={6}>
                       <Controller
                         name="first_name"
                         control={control}
-                        rules={{ required: 'Nombre es requerido' }}
+                        rules={{
+                          required: 'Nombre es requerido',
+                          pattern: {
+                            value: /^[a-zA-ZÀ-ÿ\s]*$/,
+                            message: 'El nombre no puede contener números ni caracteres especiales'
+                          }
+                        }}
                         render={({ field }) => (
                           <TextField
                             label="Nombre"
@@ -105,7 +115,13 @@ const Register = () => {
                       <Controller
                         name="last_name"
                         control={control}
-                        rules={{ required: 'Apellido es requerido' }}
+                        rules={{
+                          required: 'Apellido es requerido',
+                          pattern: {
+                            value: /^[a-zA-ZÀ-ÿ\s]*$/,
+                            message: 'El apellido no puede contener números ni caracteres especiales'
+                          }
+                        }}
                         render={({ field }) => (
                           <TextField
                             label="Apellido"
@@ -161,13 +177,15 @@ const Register = () => {
                     disabled={isSubmitting}
                     fullWidth
                   >
-                    {isSubmitting ? 'Registrando...' : 'Registrarse'}
+                    {isSubmitting ? 'Registrando' : 'Registrarse'}
                   </Button>
                 </form>
               </>
             )
           }
-          <ToastContainer position="bottom-center" />
+          <div className="login-link">
+            <a href="/signin">¿Ya tienes una cuenta? Inicia Sesión</a>
+          </div>
         </div>
       </Grid>
     </Grid>

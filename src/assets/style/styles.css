@@ -351,3 +351,34 @@ footer {
   background: #ccc;
 }
 
+.register-form .register-link {
+  margin-top: 15px;
+  text-align: left;
+}
+
+.register-form .register-link a {
+  color: var(--scrollbar-thumb-color);
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.register-form .register-link a:hover {
+  text-decoration: underline;
+}
+
+.register-form .login-link {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.register-form .login-link a {
+  color: var(--scrollbar-thumb-color);
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.register-form .login-link a:hover {
+  text-decoration: underline;
+}

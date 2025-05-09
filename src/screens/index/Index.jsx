@@ -23,8 +23,7 @@ const Index = () => {
 
   const getIndex = async () => {
     try {
-      const token = localStorage.getItem('@token');
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/index/`, { headers: { 'Authorization': `Token ${token}` } });
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/index/`);
       setState(data);
     } catch {
       toast.error('Error al iniciar sesión');

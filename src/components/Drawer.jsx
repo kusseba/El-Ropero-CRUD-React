@@ -56,12 +56,12 @@ const Drawer = () => {
         !!profile ?
           <>
             <List>
-              <ListItem disablePadding>
+              <ListItem component={Link} to='/address' disablePadding>
                 <ListItemButton>
                   <ListItemIcon style={{ minWidth: 40 }}>
                     <MapPin color='#1b1b1b' />
                   </ListItemIcon>
-                  <ListItemText primary='Mis Direcciones' style={{ color: '#1b1b1b' }} />
+                  <ListItemText primary='Mi Direcciones' style={{ color: '#1b1b1b' }} />
                 </ListItemButton>
               </ListItem>
 
@@ -121,6 +121,15 @@ const Drawer = () => {
                   <CircleAlert color='#1b1b1b' />
                 </ListItemIcon>
                 <ListItemText primary='Preguntas Frecuentes' style={{ color: '#1b1b1b' }} />
+              </ListItemButton>
+            </ListItem>
+
+<ListItem component={Link} to='signin' disablePadding>
+              <ListItemButton>
+                <ListItemIcon style={{ minWidth: 40 }}>
+                  <CircleAlert color='#1b1b1b' />
+                </ListItemIcon>
+                <ListItemText primary='Iniciar Sesión' style={{ color: '#1b1b1b' }} />
               </ListItemButton>
             </ListItem>
           </List>
